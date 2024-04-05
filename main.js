@@ -1,16 +1,3 @@
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
-}
-
-Book.prototype.info = function () {
-  return this.title + " " + this.author;
-};
-
-const Hobbit = new Book("Hobbit", "by J.R.R.", "295 pages", "not read yet");
-
 const addBookBtn = document.querySelector("#btn-add");
 const addBookWind = document.querySelector("#modal-wind__add");
 
@@ -115,6 +102,13 @@ function removeToArray(bookData) {
   }
 }
 
+// function Book(title, author, pages, read) {
+//   this.title = title;
+//   this.author = author;
+//   this.pages = pages;
+//   this.read = read;
+// }
+
 // function Book(title, author, pages) {
 //   this.title = title;
 //   this.author = author;
@@ -143,3 +137,9 @@ function removeToArray(bookData) {
 // // console.log(myLibrary);
 
 // // console.log(myLibrary[1]);
+
+// Book.prototype.info = function () {
+//   return this.title + " " + this.author;
+// };
+
+// const Hobbit = new Book("Hobbit", "by J.R.R.", "295 pages", "not read yet");
