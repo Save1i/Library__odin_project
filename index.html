@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>library</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Mako&family=Ojuju:wght@200..800&family=Public+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <div class="header__inner">
+        <p class="header__title">library</p>
+        <button class="header__login">Log in</button>
+      </div>
+    </header>
+    <main class="main">
+      <button class="btn btn__add" id="btn-add" type="button">+ Add book</button>
+      <form class="modal__add" id="modal-wind__add">
+        <div class="modal__inner" id="modal-wind__box">
+          <div class="modal__title">Add new book</div>
+          <div class="about-book">
+            <input
+              class="modal__input"
+              id="title"
+              type="text"
+              placeholder="Title"
+              required
+              value="22"
+              name="title"
+            />
+            <input
+              class="modal__input"
+              id="author"
+              type="text"
+              placeholder="Author"
+              required
+              value="22"
+              name="author"
+            />
+            <input
+              class="modal__input"
+              id="pages"
+              type="number"
+              placeholder="Pages"
+              required
+              value="22"
+              name="pages"
+            />
+          </div>
+          <div class="is-read">
+            <label for="is-read">Heve you read it?</label>
+            <input class="checkbox" id="is-read" type="checkbox" name="checkbox" value="0" />
+          </div>
+          <button class="btn btn-light-green" name="key" type="submit">Submit</button>
+        </div>
+      </form>
+      <div class="library">
+        <div class="library__inner" id="libraryInner"></div>
+      </div>
+    </main>
+    <script src="main.js"></script>
+  </body>
+</html>
