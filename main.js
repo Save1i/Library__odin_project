@@ -1,49 +1,38 @@
 const addBookBtn = document.querySelector("#btn-add");
+
+const library = document.querySelector("#libraryInner");
 const addBookWind = document.querySelector("#modal-wind__add");
-
-addBookBtn.addEventListener("click", () => {
-  addBookWind.classList.add("open");
-});
-
-window.addEventListener("keydown", (btn) => {
-  if (btn.key === "Escape") {
-    addBookWind.classList.remove("open");
-  }
-});
-
-document.addEventListener("click", (e) => {
-  if (e.target == addBookWind) {
-    addBookWind.classList.remove("open");
-  }
-});
 
 const titleInput = document.querySelector("#title");
 const authorInput = document.querySelector("#author");
 const pagesInput = document.querySelector("#pages");
+const isRead = document.querySelector("#is-read");
 
-const library = document.querySelector("#libraryInner");
+class Book {
+  constructor(container, title, author, pages, isread) {
+    this.bookCard = document.createElement("div");
+    this.title = document.createElement("p");
+    this.author = document.createElement("p");
+    this.pages = document.createElement("p");
+    this.isReadBtn = document.createElement("button");
+    this.removeBtn = document.createElement("button");
 
-let myLibrary = [];
+    this.bookCard.className = "book__card";
+    this.isReadBtn.className = "btn btn-red";
+    this.isReadBtn.textContent = "Is read";
+    this.removeBtn.className = "btn btn-remove";
+    this.removeBtn.textContent = "Remove";
 
-function serializeForm(addBook) {
-  const { elements } = addBook;
-  const data = Array.from(elements).map((element) => {
-    const { name, value } = element;
-
-    return { name, value };
-  });
-  myLibrary.push(data);
-  // console.log(myLibrary);
-  createBook(data);
+    container.append(this.bookCard);
+    this.bookCard.append(this.title);
+    this.bookCard.append(this.author);
+    this.bookCard.append(this.pages);
+    this.bookCard.append(this.isReadBtn);
+  }
 }
 
-function handleFormSubmit(event) {
-  event.preventDefault();
-  serializeForm(applicantForm);
-}
-
-const applicantForm = document.querySelector("#modal-wind__add");
-applicantForm.addEventListener("submit", handleFormSubmit);
+let newBook = new Book(library);
+newBook.hi();
 
 function createBook(form) {
   const bookCard = document.createElement("div");
@@ -86,6 +75,43 @@ function createBook(form) {
     }
   });
 
+  addBookBtn.addEventListener("click", () => {
+    addBookWind.classList.add("open");
+  });
+
+  window.addEventListener("keydown", (btn) => {
+    if (btn.key === "Escape") {
+      addBookWind.classList.remove("open");
+    }
+  });
+
+  document.addEventListener("click", (e) => {
+    if (e.target == addBookWind) {
+      addBookWind.classList.remove("open");
+    }
+  });
+
+  let myLibrary = [];
+
+  addBookWind.addEventListener("submit", handleFormSubmit);
+
+  function handleFormSubmit(event) {
+    event.preventDefault();
+    serializeForm(addBookWind);
+  }
+
+  function serializeForm(addBookObject) {
+    const { elements } = addBookObject;
+    const data = Array.from(elements).map((element) => {
+      const { name, value } = element;
+
+      return { name, value };
+    });
+    myLibrary.push(data);
+    // console.log(myLibrary);
+    createBook(data);
+  }
+
   isReadBtn.addEventListener("click", () => {
     isReadBtn.classList.toggle("btn-light-green");
   });
@@ -101,6 +127,8 @@ function removeToArray(bookData) {
     console.log(myLibrary);
   }
 }
+
+// console.log(myLibrary);
 
 // function Book(title, author, pages, read) {
 //   this.title = title;
