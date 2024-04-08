@@ -1,38 +1,36 @@
+import { Book } from "./Book.js";
+
 const addBookBtn = document.querySelector("#btn-add");
 
 const library = document.querySelector("#libraryInner");
 const addBookWind = document.querySelector("#modal-wind__add");
-
 const titleInput = document.querySelector("#title");
 const authorInput = document.querySelector("#author");
 const pagesInput = document.querySelector("#pages");
-const isRead = document.querySelector("#is-read");
+const isReadCheck = document.querySelector("#is-read");
 
-class Book {
-  constructor(container, title, author, pages, isread) {
-    this.bookCard = document.createElement("div");
-    this.title = document.createElement("p");
-    this.author = document.createElement("p");
-    this.pages = document.createElement("p");
-    this.isReadBtn = document.createElement("button");
-    this.removeBtn = document.createElement("button");
+let newBook = new Book(library, "Harry", "Evgeniy", 323, true);
+let newBook2 = new Book(library, "566", "Oppengamer", 676, false);
 
-    this.bookCard.className = "book__card";
-    this.isReadBtn.className = "btn btn-red";
-    this.isReadBtn.textContent = "Is read";
-    this.removeBtn.className = "btn btn-remove";
-    this.removeBtn.textContent = "Remove";
+workModal();
 
-    container.append(this.bookCard);
-    this.bookCard.append(this.title);
-    this.bookCard.append(this.author);
-    this.bookCard.append(this.pages);
-    this.bookCard.append(this.isReadBtn);
-  }
+function workModal() {
+  addBookBtn.addEventListener("click", () => {
+    addBookWind.classList.add("open");
+  });
+
+  window.addEventListener("keydown", (btn) => {
+    if (btn.key === "Escape") {
+      addBookWind.classList.remove("open");
+    }
+  });
+
+  document.addEventListener("click", (e) => {
+    if (e.target == addBookWind) {
+      addBookWind.classList.remove("open");
+    }
+  });
 }
-
-let newBook = new Book(library);
-newBook.hi();
 
 function createBook(form) {
   const bookCard = document.createElement("div");
@@ -128,6 +126,7 @@ function removeToArray(bookData) {
   }
 }
 
+/////////////////
 // console.log(myLibrary);
 
 // function Book(title, author, pages, read) {
