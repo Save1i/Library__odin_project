@@ -9,8 +9,8 @@ const authorInput = document.querySelector("#author");
 const pagesInput = document.querySelector("#pages");
 const isReadCheck = document.querySelector("#is-read");
 
-let newBook = new Book(library, "Harry", "Evgeniy", 323, true);
-let newBook2 = new Book(library, "566", "Oppengamer", 676, false);
+// let newBook = new Book(library, "Harry", "Evgeniy", 323, true);
+// let newBook2 = new Book(library, "566", "Oppengamer", 676, false);
 
 workModal();
 
@@ -30,6 +30,20 @@ function workModal() {
       addBookWind.classList.remove("open");
     }
   });
+}
+
+addBookWind.addEventListener("submit", handleFormSubmit);
+
+function handleFormSubmit(event) {
+  event.preventDefault();
+
+  let newBook = new Book(
+    library,
+    titleInput.value,
+    authorInput.value,
+    pagesInput.value,
+    isReadCheck.checked
+  );
 }
 
 function createBook(form) {
