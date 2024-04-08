@@ -73,7 +73,7 @@ export class Book {
 
   set isread(value) {
     this._isread = value;
-    if (value) {
+    if (value === true) {
       this.isReadBtn.className = "btn btn-light-green";
     } else {
       this.isReadBtn.className = "btn btn-red";
