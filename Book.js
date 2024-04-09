@@ -1,4 +1,4 @@
-// import { BookList } from "./BooksList.js";
+import { BookList } from "./BooksList.js";
 
 export class Book {
   _title = "";
@@ -30,6 +30,7 @@ export class Book {
       if (confirm("Вы уверенны?")) {
         this.removeBook();
       }
+      // console.log(newLib);
     });
 
     this.bookCard.append(this.titleText);
@@ -44,11 +45,20 @@ export class Book {
     this.pages = pages;
     this.isread = isread;
 
-    container.append(this.bookCard);
+    if (container instanceof BookList) {
+      container.libraryCont.append(this.bookCard);
+    } else {
+      container.append(this.bookCard);
+    }
   }
 
   removeBook() {
     this.bookCard.remove();
+
+    if (this.container instanceof BookList) {
+      this.container.remove(this);
+    }
+    console.log(this.container);
   }
 
   set title(value) {

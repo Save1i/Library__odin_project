@@ -1,19 +1,40 @@
-// import { Book } from "./Book.js";
+import { Book } from "./Book.js";
 
-// class BookList {
-//   constructor(container) {
-//     this.container = container;
-//     this.list = document.querySelector("#libraryInner");
+export class BookList {
+  _books = [];
 
-//     container.innerHTML = "";
-//     container.append(this.list);
-//   }
+  constructor(container) {
+    // container.innerHTML = "";// обновление чекущего эллемента, но он будет один
+    this.libraryCont = document.querySelector("#libraryInner");
+    this.container = container;
+  }
 
-//   add(title, author, pages, isread) {
-//     let newBook = new Book(this.container, title, author, pages, isread);
-//   }
-// }
+  getNewId() {
+    let max = 0;
+    for (const book of this._books) {
+      if (book.id > max) {
+        max = book.id;
+      }
+    }
+    return max + 1;
+  }
 
-// let newLib = BookList(library);
+  remove(value) {
+    let id = value;
 
-// newLib.add("fdfd", "fdfdf", "1232", true);
+    if (value instanceof Book) {
+      id = value.id;
+    }
+    for (let i = 0; i < this._books.length; i++) {
+      if (this._books[i].id == id) {
+        this._books.splice(i, 1);
+      }
+    }
+  }
+
+  add(title, author, pages, isread) {
+    let newBook = new Book(this, title, author, pages, isread);
+    newBook.id = this.getNewId();
+    this._books.push(newBook);
+  }
+}

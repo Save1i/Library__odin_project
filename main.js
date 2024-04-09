@@ -1,4 +1,5 @@
 import { Book } from "./Book.js";
+import { BookList } from "./BooksList.js";
 
 const addBookBtn = document.querySelector("#btn-add");
 
@@ -13,28 +14,17 @@ const isReadCheck = document.querySelector("#is-read");
 // let newBook = new Book(library, "Harry", "Evgeniy", 323, true);
 // let newBook2 = new Book(library, "566", "Oppengamer", 676, false);
 
-class BookList {
-  constructor(container) {
-    this.container = container;
-  }
-
-  add(title, author, pages, isread) {
-    let newBook = new Book(this.container, title, author, pages, isread);
-  }
-}
-
-// let newLib = new BookList(library);
-// newLib.add("fdfd", "fdfdf", "1232", true);
-
 workModal();
 
 addBookWind.addEventListener("submit", handleFormSubmit);
 
+let newLib = new BookList(library);
+
 function handleFormSubmit(event) {
   event.preventDefault();
 
-  let newLib = new BookList(library);
   newLib.add(titleInput.value, authorInput.value, pagesInput.value, isReadCheck.checked);
+  console.log(newLib);
 }
 
 function workModal() {
