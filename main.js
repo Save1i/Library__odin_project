@@ -2,6 +2,7 @@ import { Book } from "./Book.js";
 
 const addBookBtn = document.querySelector("#btn-add");
 
+// const libraryCont = document.querySelector("#library");
 const library = document.querySelector("#libraryInner");
 const addBookWind = document.querySelector("#modal-wind__add");
 const titleInput = document.querySelector("#title");
@@ -12,7 +13,29 @@ const isReadCheck = document.querySelector("#is-read");
 // let newBook = new Book(library, "Harry", "Evgeniy", 323, true);
 // let newBook2 = new Book(library, "566", "Oppengamer", 676, false);
 
+class BookList {
+  constructor(container) {
+    this.container = container;
+  }
+
+  add(title, author, pages, isread) {
+    let newBook = new Book(this.container, title, author, pages, isread);
+  }
+}
+
+// let newLib = new BookList(library);
+// newLib.add("fdfd", "fdfdf", "1232", true);
+
 workModal();
+
+addBookWind.addEventListener("submit", handleFormSubmit);
+
+function handleFormSubmit(event) {
+  event.preventDefault();
+
+  let newLib = new BookList(library);
+  newLib.add(titleInput.value, authorInput.value, pagesInput.value, isReadCheck.checked);
+}
 
 function workModal() {
   addBookBtn.addEventListener("click", () => {
@@ -30,20 +53,6 @@ function workModal() {
       addBookWind.classList.remove("open");
     }
   });
-}
-
-addBookWind.addEventListener("submit", handleFormSubmit);
-
-function handleFormSubmit(event) {
-  event.preventDefault();
-
-  let newBook = new Book(
-    library,
-    titleInput.value,
-    authorInput.value,
-    pagesInput.value,
-    isReadCheck.checked
-  );
 }
 
 function createBook(form) {

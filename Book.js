@@ -1,10 +1,13 @@
+// import { BookList } from "./BooksList.js";
+
 export class Book {
   _title = "";
   _author = "";
   _pages = "";
   _isread = "";
 
-  constructor(container, title = "", author = "", pages = "", isread = false) {
+  constructor(container, title = "", author = "", pages = "", isread) {
+    this.library = document.createElement("div");
     this.bookCard = document.createElement("div");
     this.titleText = document.createElement("p");
     this.authorText = document.createElement("p");
@@ -12,6 +15,7 @@ export class Book {
     this.isReadBtn = document.createElement("button");
     this.removeBtn = document.createElement("button");
 
+    this.library.className = "library__inner";
     this.bookCard.className = "book__card";
     this.isReadBtn.className = "btn btn-red";
     this.isReadBtn.textContent = "Is read";
@@ -34,6 +38,7 @@ export class Book {
     this.bookCard.append(this.isReadBtn);
     this.bookCard.append(this.removeBtn);
 
+    this.container = container;
     this.title = title;
     this.author = author;
     this.pages = pages;
