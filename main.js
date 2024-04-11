@@ -45,7 +45,7 @@ function workModal() {
     }
   });
 }
-
+//
 // function createBook(form) {
 //   const bookCard = document.createElement("div");
 //   bookCard.className = "book__card";
