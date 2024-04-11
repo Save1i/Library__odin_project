@@ -114,7 +114,7 @@ function removeToArray(bookData) {
     console.log(myLibrary);
   }
 }
-
+//
 // function Book(title, author, pages) {
 //   this.title = title;
 //   this.author = author;
