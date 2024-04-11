@@ -24,6 +24,7 @@ export class Book {
 
     this.isReadBtn.addEventListener("click", () => {
       this.isread = !this.isread;
+      console.log(newLib);
     });
 
     this.removeBtn.addEventListener("click", () => {
@@ -46,7 +47,7 @@ export class Book {
     this.isread = isread;
 
     if (container instanceof BookList) {
-      container.libraryCont.append(this.bookCard);
+      container.library.append(this.bookCard);
     } else {
       container.append(this.bookCard);
     }
@@ -58,6 +59,7 @@ export class Book {
     if (this.container instanceof BookList) {
       this.container.remove(this);
     }
+
     console.log(this.container);
   }
 
@@ -92,6 +94,10 @@ export class Book {
       this.isReadBtn.className = "btn btn-light-green";
     } else {
       this.isReadBtn.className = "btn btn-red";
+    }
+
+    if (this.container instanceof BookList) {
+      this.container.save();
     }
   }
 
