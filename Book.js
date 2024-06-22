@@ -105,4 +105,3 @@ export class Book {
     return this._isread;
   }
 }
-//

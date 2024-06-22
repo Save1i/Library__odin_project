@@ -51,6 +51,19 @@ function workModal() {
 //   bookCard.className = "book__card";
 //   library.append(bookCard);
 
+<<<<<<< HEAD
+// Обновленная функция addToArray, которая удаляет данные книги из массива
+function removeToArray(bookData) {
+  // Находим индекс данной книги в массиве myLibrary
+  const index = myLibrary.findIndex((item) => item === bookData);
+  // Если найден, удаляем данные книги из массива
+  if (index !== -1) {
+    myLibrary.splice(index, 1);
+    console.log(myLibrary);
+  }
+}
+//
+=======
 //   for (let i = 0; i < 3; i++) {
 //     const text = document.createElement("p");
 //     text.textContent = form[i].value;
@@ -129,17 +142,28 @@ function workModal() {
 //   });
 // }
 
-// Обновленная функция addToArray, которая удаляет данные книги из массива
-function removeToArray(bookData) {
-  // Находим индекс данной книги в массиве myLibrary
-  const index = myLibrary.findIndex((item) => item === bookData);
-  // Если найден, удаляем данные книги из массива
-  if (index !== -1) {
-    myLibrary.splice(index, 1);
-    console.log(myLibrary);
-  }
-}
+// // Обновленная функция addToArray, которая удаляет данные книги из массива
+// function removeToArray(bookData) {
+//   // Находим индекс данной книги в массиве myLibrary
+//   const index = myLibrary.findIndex((item) => item === bookData);
+//   // Если найден, удаляем данные книги из массива
+//   if (index !== -1) {
+//     myLibrary.splice(index, 1);
+//     console.log(myLibrary);
+//   }
+// }
 
+/////////////////
+// console.log(myLibrary);
+
+// function Book(title, author, pages, read) {
+//   this.title = title;
+//   this.author = author;
+//   this.pages = pages;
+//   this.read = read;
+// }
+
+>>>>>>> develop
 // function Book(title, author, pages) {
 //   this.title = title;
 //   this.author = author;
