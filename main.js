@@ -51,7 +51,6 @@ function workModal() {
 //   bookCard.className = "book__card";
 //   library.append(bookCard);
 
-<<<<<<< HEAD
 // Обновленная функция addToArray, которая удаляет данные книги из массива
 function removeToArray(bookData) {
   // Находим индекс данной книги в массиве myLibrary
@@ -63,7 +62,7 @@ function removeToArray(bookData) {
   }
 }
 //
-=======
+
 //   for (let i = 0; i < 3; i++) {
 //     const text = document.createElement("p");
 //     text.textContent = form[i].value;
@@ -163,7 +162,7 @@ function removeToArray(bookData) {
 //   this.read = read;
 // }
 
->>>>>>> develop
+develop;
 // function Book(title, author, pages) {
 //   this.title = title;
 //   this.author = author;
