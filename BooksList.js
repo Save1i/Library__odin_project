@@ -1,118 +1,145 @@
-import { Book } from "./Book.js";
+function Book(title, author, pages, read) {
+  this.title = title;
+  this.author = author;
+  this.pages = pages;
+  this.read = read;
+}
 
-export class BookList {
-  _books = [];
-  _key = null;
-  _def = [];
+Book.prototype.info = function () {
+  return this.title + " " + this.author;
+};
 
-  constructor(container, key, def = []) {
-    // container.innerHTML = "";// обновление чекущего эллемента, но он будет один
-    this.libraryCont = document.querySelector("#library");
-    this.library = document.querySelector("#libraryInner");
-    this.container = container;
+const Hobbit = new Book("Hobbit", "by J.R.R.", "295 pages", "not read yet");
 
-    this._key = key;
-    this._def = def;
+const addBookBtn = document.querySelector("#btn-add");
+const addBookWind = document.querySelector("#modal-wind__add");
 
-    this.update();
+addBookBtn.addEventListener("click", () => {
+  addBookWind.classList.add("open");
+});
+
+window.addEventListener("keydown", (btn) => {
+  if (btn.key === "Escape") {
+    addBookWind.classList.remove("open");
+  }
+});
+
+document.addEventListener("click", (e) => {
+  if (e.target == addBookWind) {
+    addBookWind.classList.remove("open");
+  }
+});
+
+const titleInput = document.querySelector("#title");
+const authorInput = document.querySelector("#author");
+const pagesInput = document.querySelector("#pages");
+
+const library = document.querySelector("#libraryInner");
+
+let myLibrary = [];
+
+function serializeForm(addBook) {
+  const { elements } = addBook;
+  const data = Array.from(elements).map((element) => {
+    const { name, value } = element;
+
+    return { name, value };
+  });
+  myLibrary.push(data);
+  // console.log(myLibrary);
+  createBook(data);
+}
+
+function handleFormSubmit(event) {
+  event.preventDefault();
+  serializeForm(applicantForm);
+}
+
+const applicantForm = document.querySelector("#modal-wind__add");
+applicantForm.addEventListener("submit", handleFormSubmit);
+
+function createBook(form) {
+  const bookCard = document.createElement("div");
+  bookCard.className = "book__card";
+  library.append(bookCard);
+
+  for (let i = 0; i < 3; i++) {
+    const text = document.createElement("p");
+    text.textContent = form[i].value;
+    bookCard.append(text);
   }
 
-  getNewId() {
-    let max = 0;
-    for (const book of this._books) {
-      if (book.id > max) {
-        max = book.id;
-      }
+  const isReadBtn = document.createElement("button");
+  isReadBtn.className = "btn btn-red";
+  isReadBtn.textContent = "Is read";
+  bookCard.append(isReadBtn);
+
+  const removeBtn = document.createElement("button");
+  removeBtn.className = "btn btn-remove";
+  removeBtn.textContent = "Remove";
+  bookCard.append(removeBtn);
+
+  // Добавляем данные книги в функцию addToArray при вызове
+  removeBtn.addEventListener("click", () => {
+    const parentCard = removeBtn.closest(".book__card");
+    console.log(parentCard);
+    if (parentCard) {
+      const indexToRemove = Array.from(library.children).indexOf(parentCard);
+      console.log(indexToRemove);
+      const bookData = myLibrary[indexToRemove];
+
+      parentCard.remove();
+
+      // Удаляем соответствующий элемент из массива myLibrary
+      myLibrary.splice(indexToRemove, 1);
+
+      // Передаем данные книги в функцию addToArray для удаления из массива
+      removeToArray(bookData);
+      console.log(myLibrary);
     }
-    return max + 1;
-  }
+  });
 
-  add(title, author, pages, isread) {
-    let newBook = new Book(this, title, author, pages, isread);
-    newBook.id = this.getNewId();
-    this._books.push(newBook);
+  isReadBtn.addEventListener("click", () => {
+    isReadBtn.classList.toggle("btn-light-green");
+  });
+}
 
-    this.warning();
-    this.save();
-
-    console.log(this._books);
-  }
-
-  remove(value) {
-    let id = value;
-
-    if (value instanceof Book) {
-      id = value.id;
-    }
-    for (let i = 0; i <= this._books.length; i++) {
-      if (this._books[i].id == id) {
-        this._books.splice(i, 1);
-      }
-    }
-
-    this.warning();
-    this.save();
-  }
-
-  warning() {
-    if (this._books.length == 0) {
-      this.warn = document.createElement("div");
-      this.warn.className = "warnBox";
-      this.warn.textContent = "В библиотеке нет книг";
-
-      this.libraryCont.prepend(this.warn);
-    } else {
-      if (this.warn) {
-        this.warn.remove();
-      }
-    }
-  }
-
-  save() {
-    if (this._key) {
-      let saveList = [];
-
-      for (const book of this._books) {
-        saveList.push({
-          id: book.id,
-          title: book._title,
-          author: book._author,
-          pages: book._pages,
-          isread: book._isread,
-        });
-      }
-      localStorage.setItem(this._key, JSON.stringify(saveList));
-    }
-  }
-
-  update() {
-    // let startList = []; -- по умолчанию пустой массив
-    let startList = this._def;
-    this._books = [];
-    this.library.innerHTML = "";
-
-    if (this._key) {
-      let detaLS = localStorage.getItem(this._key);
-      if (detaLS != "" && detaLS != null) {
-        startList = JSON.parse(detaLS);
-      }
-    }
-
-    if (startList.length > 0) {
-      for (const obj of startList) {
-        let newBook = new Book(this, obj.author, obj.title, obj.pages, obj.isread);
-
-        if (obj.id) {
-          newBook.id = obj.id;
-        } else {
-          newBook.id = this.getNewId();
-        }
-
-        this._books.push(newBook);
-      }
-    }
-
-    this.save();
-    this.warning();
+// Обновленная функция addToArray, которая удаляет данные книги из массива
+function removeToArray(bookData) {
+  // Находим индекс данной книги в массиве myLibrary
+  const index = myLibrary.findIndex((item) => item === bookData);
+  // Если найден, удаляем данные книги из массива
+  if (index !== -1) {
+    myLibrary.splice(index, 1);
+    console.log(myLibrary);
   }
 }
+//
+// function Book(title, author, pages) {
+//   this.title = title;
+//   this.author = author;
+//   this.pages = pages;
+// }
+
+// function serializeForm(formNode) {
+//   console.log(formNode.elements);
+// }
+
+// function addBookToLibrary() {
+//   let title = titleInput.value;
+//   let author = authorInput.value;
+//   let pages = pagesInput.value;
+//   let book = new Book(title, author, pages);
+//   myLibrary.push(book);
+//   console.log(myLibrary);
+// }
+
+// addBookToLibrary(1, 2, 52);
+// // let add2 = new Book(2, 2, 33);
+// // myLibrary.push(add2);
+// // add2 = new Book(2, 222, 33);
+
+// // myLibrary.push(add2);
+// // console.log(myLibrary);
+
+// // console.log(myLibrary[1]);
