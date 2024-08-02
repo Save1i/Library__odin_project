@@ -32,17 +32,19 @@
               type="text"
               placeholder="Title"
               required
-              value="22"
               name="title"
+              pattern="[A-Za-zА-Яа-яЁё\s]+"
+              value="Чужак"
             />
             <input
               class="modal__input"
               id="author"
               type="text"
+              pattern="[A-Za-zА-Яа-яЁё\s]+"
               placeholder="Author"
               required
-              value="22"
               name="author"
+              value="Стивен Кинг"
             />
             <input
               class="modal__input"
@@ -50,8 +52,8 @@
               type="number"
               placeholder="Pages"
               required
-              value="22"
               name="pages"
+              value="619"
             />
           </div>
           <div class="is-read">
