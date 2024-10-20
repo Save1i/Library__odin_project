@@ -58,7 +58,7 @@ export class BookList {
     if (this._books.length == 0) {
       this.warn = document.createElement("div");
       this.warn.className = "warnBox";
-      this.warn.textContent = "В библиотеке нет книг";
+      this.warn.textContent = "There are no books in the library";
 
       this.libraryCont.prepend(this.warn);
     } else {
