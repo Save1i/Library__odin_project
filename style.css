@@ -69,6 +69,23 @@ ul {
   font-weight: 700;
 }
 
+.header__login {
+  background-color: inherit;
+  border: 2px solid rgba(139, 139, 139, 0.6);
+  height: 40px;
+  width: 80px;
+  border-radius: 10px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  }
+
+  .header__login:hover {
+    border: 2px solid rgba(139, 139, 139, 0.6);
+    background-color: #f0eef1;
+    transition: all 0.3s ease;
+  }
+
 .main {
   margin-top: 50px;
   max-width: 1200px;
